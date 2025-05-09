@@ -1,0 +1,38 @@
+<h2 class="text-4xl font-extrabold text-center text-indigo-600 mb-8">Log in</h2>
+
+<%= form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: 'max-w-md mx-auto bg-white p-10 rounded-lg shadow-lg' }) do |f| %>
+
+<%= render "devise/shared/error_messages", resource: resource %>
+
+<div class="mb-6">
+    <%= f.label :email, class: 'block text-sm font-medium text-gray-700' %>
+    <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'mt-2 block w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500' %>
+</div>
+
+<div class="mb-6">
+    <%= f.label :password, class: 'block text-sm font-medium text-gray-700' %>
+    <%= f.password_field :password, autocomplete: "current-password", class: 'mt-2 block w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500' %>
+</div>
+
+<% if devise_mapping.rememberable? %>
+<div class="mb-6 flex items-center">
+    <%= f.check_box :remember_me, class: 'h-5 w-5 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500' %>
+    <%= f.label :remember_me, class: 'ml-3 text-sm text-gray-800' %>
+</div>
+<% end %>
+
+<div class="flex justify-center mt-6">
+    <%= f.submit "Log in", class: 'w-full py-3 px-6 bg-indigo-600 text-white font-semibold rounded-md shadow-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50' %>
+</div>
+
+<% end %>
+
+<!-- Custom links -->
+<div class="mt-8 text-center">
+    <p class="text-sm text-gray-600">
+        <a href="<%= new_user_registration_path %>" class="text-indigo-600 hover:text-indigo-700 font-medium">Don't have an account? Sign up</a>
+    </p>
+    <p class="mt-2 text-sm text-gray-600">
+        <a href="<%= new_user_password_path %>" class="text-indigo-600 hover:text-indigo-700 font-medium">Forgot your password?</a>
+    </p>
+</div>

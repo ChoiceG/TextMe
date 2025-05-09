@@ -1,5 +1,16 @@
 Rails.application.routes.draw do
-  root "home#index"
+  root "pages#home"
+
+  devise_for :users, controllers: {
+    registrations: "users/registrations",
+    sessions: "users/sessions"  # Optional, if you want to customize login
+  }
+  
+  # You can keep the custom route for the new user session if needed:
+  devise_scope :user do
+    get "users", to: 'devise/sessions#new'
+  end
+  
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
