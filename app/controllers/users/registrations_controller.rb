@@ -10,9 +10,31 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   # POST /resource
-  def create
-    super
+def create
+  super do |resource|
+    if resource.errors.any?
+      Rails.logger.debug "User signup errors: #{resource.errors.full_messages.join(', ')}"
+      respond_to do |format|
+        format.turbo_stream { 
+          render turbo_stream: turbo_stream.replace('sign_up_form', partial: 'devise/registrations/form', locals: { resource: resource }) 
+        }
+        format.html { render :new, status: :unprocessable_entity } # fallback
+      end
+      return
+    else
+      respond_to do |format|
+        format.turbo_stream { 
+          # Instead of redirect_to, render a Turbo Stream that performs a redirect or update
+          render turbo_stream: turbo_stream.replace('sign_up_form', partial: 'some_partial_after_success', locals: { resource: resource })
+          # Or if you want to redirect, you need JS that triggers a redirect on the client.
+        }
+        format.html { redirect_to after_sign_up_path_for(resource) }
+      end
+      return
+    end
   end
+end
+
 
   # GET /resource/edit
   # def edit

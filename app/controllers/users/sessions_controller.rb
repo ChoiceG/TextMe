@@ -9,9 +9,12 @@ class Users::SessionsController < Devise::SessionsController
   # end
 
   # POST /resource/sign_in
-  # def create
-  #   super
-  # end
+  def create
+    # Fix for turbo_stream requests that cause `.empty?` error on User instance
+    request.format = :html if request.format == Mime[:turbo_stream]
+    
+    super
+  end
 
   # DELETE /resource/sign_out
   # def destroy

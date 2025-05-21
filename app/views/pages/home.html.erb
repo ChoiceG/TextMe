@@ -1,11 +1,31 @@
-<div>
-    <h1 class="font-bold text-4xl">Pages#home</h1>
-    <p>Find me in app/views/pages/home.html.erb</p>
+<div class="min-h-screen bg-white flex flex-col items-center justify-start pt-24 px-4 text-center">
 
-    <%if current_user%>
-    <%= button_to "Log Out", destroy_user_session_path, method: :delete %>
+    <%= image_tag "logo.png", alt: "TextMe Logo", class: "w-24 h-24 rounded-full mb-6" %>
+
+    <h1 class=" text-4xl sm:text-5xl font-extrabold text-gray-900 mb-4">
+        Welcome to <span class="text-indigo-600">TextMe</span>
+    </h1>
+
+    <p class="text-lg text-gray-600 mb-8 max-w-xl">
+        A simple and secure way to connect with people you care about. Fast, reliable and beautifully built with Ruby on Rails.
+    </p>
+
+    <% if current_user.present? %>
+    <p class="text-sm text-gray-500 mb-4">You’re logged in as <strong><%= current_user.email %></strong>.</p>
+
+    <div class="flex flex-col sm:flex-row gap-4">
+        <%= link_to "Start Chatting", "#", class: "inline-block bg-indigo-600 text-white px-6 py-3 rounded-lg shadow hover:bg-indigo-700 transition" %>
+
+        <%= button_to "Log Out", destroy_user_session_path, method: :delete, 
+        class: "inline-block bg-red-500 text-white px-6 py-3 rounded-lg shadow hover:bg-red-600 transition" %>
+    </div>
     <% else %>
-    <%= link_to "Log In", new_user_session_path %>
-    <%= link_to "Sign Up", new_user_registration_path %>
-    <%end%>
+    <div class="flex flex-col sm:flex-row gap-4">
+        <%= link_to "Log In", new_user_session_path, 
+        class: "inline-block bg-indigo-600 text-white px-6 py-3 rounded-lg shadow hover:bg-indigo-700 transition" %>
+
+        <%= link_to "Sign Up", new_user_registration_path, 
+        class: "inline-block bg-gray-100 text-gray-700 px-6 py-3 rounded-lg shadow hover:bg-gray-200 transition" %>
+    </div>
+    <% end %>
 </div>
