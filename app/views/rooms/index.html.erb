@@ -1,0 +1,51 @@
+<div class="min-h-screen bg-white flex flex-col items-center justify-start pt-18 px-4 text-center">
+  <h1 class="text-4xl sm:text-5xl font-extrabold text-gray-900 mb-6">
+    Chat <span class="text-indigo-600">Rooms</span>
+  </h1>
+
+  <p class="text-lg text-gray-600 mb-8 max-w-2xl mx-auto">
+    Dive into any room and start chatting. Real-time messaging made easy with Rails.
+  </p>
+
+  <% if current_user.present? %>
+    <p class="text-sm text-gray-500 mb-6">
+      Logged in as <strong><%= current_user.email %></strong>
+    </p>
+  <% end %>
+
+  <div class="w-full max-w-6xl text-left mb-12">
+  <h2 class="text-2xl font-semibold text-gray-800 mb-4">Other Users</h2>
+
+  <% if @users.any? %>
+    <div class="grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+      <% @users.each do |user| %>
+        <div class="bg-white border rounded-xl p-4 shadow hover:shadow-md transition">
+          <p class="text-gray-800 font-medium"><%= user.email %></p>
+          <%# Add a button or link to message user if you want %>
+        </div>
+      <% end %>
+    </div>
+  <% else %>
+    <p class="text-gray-500 text-sm italic">No other users online right now.</p>
+  <% end %>
+</div>
+
+
+  <div class="w-full max-w-6xl text-left mb-12">
+    <h2 class="text-2xl font-semibold text-gray-800 mb-4">Available Rooms</h2>
+
+    <% if @rooms.any? %>
+      <div class="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+        <% @rooms.each do |room| %>
+          <div class="bg-gray-50 rounded-xl p-6 shadow hover:shadow-lg transition-all">
+            <h3 class="text-lg font-semibold text-indigo-700 mb-2"><%= room.name %></h3>
+            <p class="text-sm text-gray-600 mb-4"><%= truncate(room.description, length: 100) %></p>
+            <%= link_to "Enter Room", room_path(room), class: "inline-block bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition" %>
+          </div>
+        <% end %>
+      </div>
+    <% else %>
+      <p class="text-gray-500 text-sm italic mt-6">No rooms available yet. Please check back later.</p>
+    <% end %>
+  </div>
+</div>
