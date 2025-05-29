@@ -1,0 +1,13 @@
+<div class="bg-gray-100 p-3 rounded-lg shadow-sm">
+  <p class="text-sm text-gray-700 font-medium">
+    <% unless message.room.is_private %>
+        <h6><%= message.user.email %></h6>
+    <% end %>
+  </p>
+  <p class="text-base text-gray-900">
+    <%= message.content %>
+  </p>
+  <p class="text-xs text-gray-500 text-right mt-1">
+    <%= message.created_at.strftime("%b %d, %Y %I:%M %p") %>
+  </p>
+</div>

@@ -10,4 +10,6 @@ class User < ApplicationRecord
 
   # Automatically broadcasts and appends the newly created user to the "users" stream after it is successfully saved to the database.
   after_create_commit { broadcast_append_to "users" }
+  
+  has_many :messages
 end

@@ -6,4 +6,6 @@ class Room < ApplicationRecord
   
   # After a room is successfully created and saved, it automatically broadcasts and appends the room to the "rooms" stream.
   after_create_commit { broadcast_append_to "rooms" }
+
+  has_many :messages
 end

@@ -1,0 +1,13 @@
+<div class="mt-4 flex items-center space-x-2">
+  <%= form_with(model: [@single_room, @message], remote: true, class: 'flex w-full space-x-2') do |f| %>
+    <%= f.text_field :body, 
+      id: 'chat_text', 
+      class: 'flex-grow rounded-lg border border-gray-300 px-4 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500', 
+      autocomplete: 'off', 
+      placeholder: 'Type your message...' %>
+    
+    <%= f.submit "Send", 
+      disable_with: 'Sending...', 
+      class: 'shrink-0 rounded-lg bg-blue-600 px-4 py-2 text-white hover:bg-blue-700 transition duration-200 ease-in-out' %>
+  <% end %>
+</div>

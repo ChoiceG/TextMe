@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  resources :rooms
+  resources :rooms do
+    resources :messages, only: [:create]
+  end
 
   root "pages#home"
 
