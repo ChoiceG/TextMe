@@ -73,4 +73,4 @@ end
 ruby "3.3.6"
 
 # Webrick
-gem "webrick", "1.9" 
+gem "webrick", "1.9.1" 
